@@ -1,0 +1,33 @@
+{
+  "name": "convert-my-id",
+  "version": "1.0.0",
+  "private": true,
+  "description": "convert.my.id - 100% Client-Side, Privacy-First Programmatic SEO Utility Platform (100 Tools)",
+  "scripts": {
+    "generate": "node generate_tools.mjs",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx serve@latest out",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
+    "@types/three": "^0.186.0",
+    "lucide-react": "^0.454.0",
+    "next": "^14.2.16",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
+  }
+}
