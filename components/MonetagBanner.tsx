@@ -1,79 +1,48 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
-interface MonetagBannerProps {
+interface MonetagVignetteProps {
   /**
-   * Monetag Native Banner Zone ID.
-   * Replace "ISI_ZONE_ID_NANTI" with your actual numeric Zone ID from the Monetag dashboard.
+   * Monetag Vignette Zone ID.
    */
-  zoneId: string;
+  zoneId?: string;
   /**
-   * Optional custom Monetag script domain/URL if provided in your Monetag dashboard.
+   * Monetag Vignette script domain/URL.
    */
   scriptDomain?: string;
-  className?: string;
 }
 
 /**
- * Clean Native Banner Component for Monetag on convert.my.id.
- * Uses useRef + useEffect to dynamically inject the ad <script> on the client only,
- * preventing React 18 Hydration mismatches and Strict Mode duplicate script execution.
+ * Clean Vignette Banner Component for Monetag on convert.my.id.
+ * Uses useEffect to inject the vignette script safely on the client side only,
+ * preventing hydration errors and duplicate executions.
  */
-export default function MonetagBanner({
-  zoneId,
-  scriptDomain = 'https://al5sm.com/tag.min.js',
-  className = '',
-}: MonetagBannerProps) {
-  const adContainerRef = useRef<HTMLDivElement>(null);
-  const injectedZoneRef = useRef<string | null>(null);
-
+export default function MonetagVignette({
+  zoneId = '12126051',
+  scriptDomain = 'https://n6wxm.com/vignette.min.js',
+}: MonetagVignetteProps) {
   useEffect(() => {
-    const container = adContainerRef.current;
-    if (!container) return;
-
-    // Prevent duplicate injection in React 18 Strict Mode for the same zoneId
-    if (injectedZoneRef.current === zoneId) return;
-
-    // Clear previous children before injecting
-    container.innerHTML = '';
-
-    // Do not request remote ad script while placeholder ID is still active
-    const isPlaceholder =
-      !zoneId ||
-      zoneId.trim() === '' ||
-      zoneId.trim() === 'ISI_ZONE_ID_NANTI';
-
-    if (isPlaceholder) {
-      injectedZoneRef.current = zoneId;
-      return;
-    }
+    // Pastikan tidak ada duplikat script dengan ID yang sama
+    const scriptId = `monetag-vignette-${zoneId}`;
+    if (document.getElementById(scriptId)) return;
 
     const script = document.createElement('script');
+    script.id = scriptId;
     script.type = 'text/javascript';
     script.async = true;
-    script.setAttribute('data-cfasync', 'false');
     script.dataset.zone = zoneId.trim();
     script.src = scriptDomain;
 
-    container.appendChild(script);
-    injectedZoneRef.current = zoneId;
+    document.body.appendChild(script);
 
     return () => {
-      if (container) {
-        container.innerHTML = '';
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) {
+        existingScript.remove();
       }
-      injectedZoneRef.current = null;
     };
   }, [zoneId, scriptDomain]);
 
-  return (
-    <div className={`my-6 w-full overflow-hidden ${className}`}>
-      <div
-        id={`monetag-native-banner-${zoneId}`}
-        ref={adContainerRef}
-        className="flex w-full items-center justify-center overflow-hidden"
-      />
-    </div>
-  );
+  return null; // Vignette banner bersifat overlay otomatis, tidak memerlukan kontainer HTML khusus
 }
