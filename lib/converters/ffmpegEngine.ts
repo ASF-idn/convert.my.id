@@ -9,7 +9,7 @@ let ffmpegInstance: FFmpeg | null = null;
 let ffmpegLoadingPromise: Promise<FFmpeg> | null = null;
 
 const FFMPEG_CORE_BASE_URL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-const MAX_FFMPEG_INPUT_BYTES = 1024 * 1024 * 1024;
+const MAX_FFMPEG_INPUT_BYTES = 2 * 1024 * 1024 * 1024;
 
 /**
  * Asynchronously loads and initializes the singleton @ffmpeg/ffmpeg WebAssembly core in the browser.
@@ -81,7 +81,7 @@ export async function executeFFmpegJob(
   if (file.size > MAX_FFMPEG_INPUT_BYTES) {
     const fileSizeGb = (file.size / MAX_FFMPEG_INPUT_BYTES).toFixed(2);
     throw new Error(
-      `This file is ${fileSizeGb} GB, above the 1 GB limit for in-browser FFmpeg conversion. Large files can exceed browser WebAssembly memory. Use desktop FFmpeg or try a smaller file.`
+      `This file is ${fileSizeGb} GB, above the 2 GB limit for in-browser FFmpeg conversion. Large files can exceed browser WebAssembly memory. Use desktop FFmpeg or try a smaller file.`
     );
   }
 
