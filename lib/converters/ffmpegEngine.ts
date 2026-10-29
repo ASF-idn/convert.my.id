@@ -9,6 +9,7 @@ let ffmpegInstance: FFmpeg | null = null;
 let ffmpegLoadingPromise: Promise<FFmpeg> | null = null;
 
 const FFMPEG_CORE_BASE_URL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+const MAX_FFMPEG_INPUT_BYTES = 1024 * 1024 * 1024;
 
 /**
  * Asynchronously loads and initializes the singleton @ffmpeg/ffmpeg WebAssembly core in the browser.
@@ -71,6 +72,19 @@ export async function executeFFmpegJob(
   spec: FFmpegJobSpec,
   options: AudioVideoConversionOptions = {}
 ): Promise<BinaryFileConversionResult> {
+  if (file.size === 0) {
+    throw new Error(
+      'The browser reads this file as 0 B, so there is no video data to convert. If the file should be 1.2 GB, it may be an online-only cloud placeholder or an incomplete download. Copy or download it to your device, then select it again.'
+    );
+  }
+
+  if (file.size > MAX_FFMPEG_INPUT_BYTES) {
+    const fileSizeGb = (file.size / MAX_FFMPEG_INPUT_BYTES).toFixed(2);
+    throw new Error(
+      `This file is ${fileSizeGb} GB, above the 1 GB limit for in-browser FFmpeg conversion. Large files can exceed browser WebAssembly memory. Use desktop FFmpeg or try a smaller file.`
+    );
+  }
+
   const startTime = performance.now();
   const ffmpeg = await getFFmpegInstance(options.onProgress);
 

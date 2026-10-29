@@ -161,7 +161,9 @@ export default function ConverterWorkspace({ tool }: ConverterWorkspaceProps) {
         setError(
           err instanceof Error
             ? err.message
-            : 'Unable to convert this file. Please try another file.'
+            : typeof err === 'string'
+            ? err
+            : 'Conversion failed. The file may be too large for available browser memory or use an unsupported codec.'
         );
       } finally {
         setIsProcessingFile(false);
