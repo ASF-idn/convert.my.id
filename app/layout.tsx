@@ -62,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <meta name="msvalidate.01" content="21DE076E729FB5B2911615629505BF67" />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: monetagInPagePushScript }} />
       </head>
