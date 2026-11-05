@@ -5,8 +5,10 @@
   "description": "convert.my.id - 100% Client-Side, Privacy-First Programmatic SEO Utility Platform (100 Tools)",
   "scripts": {
     "generate": "node generate_tools.mjs",
+    "sitemap": "node generate_sitemap.mjs",
+    "deploy": "node deploy_github.mjs",
     "dev": "next dev",
-    "build": "next build",
+    "build": "node generate_sitemap.mjs && next build",
     "start": "npx serve@latest out",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"

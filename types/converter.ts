@@ -59,6 +59,7 @@ export interface ImageConversionOptions {
 export interface AudioVideoConversionOptions {
   onProgress?: (progressPercent: number, statusMessage?: string) => void;
   audioBitrate?: string;
+  targetHeight?: 720 | 1080 | 1440 | 2160;
 }
 
 export interface Model3DConversionOptions {

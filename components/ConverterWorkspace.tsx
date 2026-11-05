@@ -43,6 +43,19 @@ interface ConverterWorkspaceProps {
   tool: ConverterTool;
 }
 
+const AVI_RESOLUTION_HEIGHTS = {
+  original: undefined,
+  '720': 720,
+  '1080': 1080,
+  '1440': 1440,
+  '2160': 2160,
+} as const;
+type AviResolution = keyof typeof AVI_RESOLUTION_HEIGHTS;
+
+function isAviResolution(value: string): value is AviResolution {
+  return Object.prototype.hasOwnProperty.call(AVI_RESOLUTION_HEIGHTS, value);
+}
+
 function formatBytes(bytes: number): string {
   if (bytes === 0) return '0 B';
   const k = 1024;
@@ -89,6 +102,8 @@ export default function ConverterWorkspace({ tool }: ConverterWorkspaceProps) {
   const [sourcePreviewUrl, setSourcePreviewUrl] = useState<string | null>(null);
   const [imageQuality, setImageQuality] = useState<number>(85);
   const [maxWidth, setMaxWidth] = useState<string>('');
+  const [aviResolution, setAviResolution] =
+    useState<AviResolution>('original');
   const [recenter3D, setRecenter3D] = useState<boolean>(true);
   const [imageResult, setImageResult] = useState<WebPConversionResult | null>(
     null
@@ -138,7 +153,10 @@ export default function ConverterWorkspace({ tool }: ConverterWorkspaceProps) {
             return res;
           });
         } else if (isAudioVideoConverter) {
+          const targetHeight = AVI_RESOLUTION_HEIGHTS[aviResolution];
           const res = await runAudioVideoConversion(tool.slug, fileToConvert, {
+            targetHeight:
+              tool.slug === 'avi-to-mp4' ? targetHeight : undefined,
             onProgress: (pct) => {
               setProgressPercent(pct);
             },
@@ -177,6 +195,7 @@ export default function ConverterWorkspace({ tool }: ConverterWorkspaceProps) {
       tool.slug,
       imageQuality,
       maxWidth,
+      aviResolution,
       recenter3D,
     ]
   );
@@ -392,6 +411,30 @@ export default function ConverterWorkspace({ tool }: ConverterWorkspaceProps) {
             <span className="text-xs text-slate-500 dark:text-slate-400">
               Select your media file below and click Convert Now
             </span>
+          )}
+
+          {tool.slug === 'avi-to-mp4' && (
+            <label className="flex flex-wrap items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
+              <span className="font-medium">Output resolution:</span>
+              <select
+                value={aviResolution}
+                onChange={(e) =>
+                  isAviResolution(e.target.value) &&
+                  setAviResolution(e.target.value)
+                }
+                className="rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1.5 text-xs text-slate-900 focus:border-brand-500 focus:outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
+              >
+                <option value="original">Keep original</option>
+                <option value="720">720p HD</option>
+                <option value="1080">1080p Full HD</option>
+                <option value="1440">1440p QHD</option>
+                <option value="2160">2160p 4K</option>
+              </select>
+              <span className="basis-full text-slate-500 dark:text-slate-400">
+                Lanczos scaling can enlarge the video, but cannot restore detail
+                missing from the source.
+              </span>
+            </label>
           )}
 
           {isImageConverter && (

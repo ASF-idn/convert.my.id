@@ -2786,10 +2786,10 @@
   {
     "slug": "avi-to-mp4",
     "title": "AVI to MP4 Video Converter Online (Free FFmpeg WASM) | convert.my.id",
-    "metaDescription": "Convert legacy `.avi` video files into modern `.mp4` format locally via WebAssembly FFmpeg. 100% client-side WebAssembly FFmpeg processing on convert.my.id — zero video or audio server uploads.",
+    "metaDescription": "Convert AVI videos to MP4 and upscale to 720p, 1080p, 1440p, or 4K with Lanczos scaling and H.264 encoding. Process locally in your browser.",
     "h1": "AVI to MP4 Video Converter",
     "category": "Audio & Video",
-    "shortDesc": "Convert legacy `.avi` video files into modern `.mp4` format locally via WebAssembly FFmpeg.",
+    "shortDesc": "Convert AVI videos to MP4, choose an output resolution up to 4K, and encode with high-quality H.264.",
     "outputExtension": "mp4",
     "outputMimeType": "video/mp4",
     "faqs": [
@@ -2804,6 +2804,10 @@
       {
         "question": "What is the maximum file size supported by AVI to MP4 Video Converter?",
         "answer": "Because processing occurs in browser WebAssembly memory, files up to 500MB–1GB can typically be transcoded depending on your device's available RAM."
+      },
+      {
+        "question": "Can I upscale my AVI video to a higher resolution?",
+        "answer": "Yes. Choose 720p, 1080p, 1440p, or 4K before converting. Lanczos scaling enlarges the video smoothly, but upscaling cannot recreate detail that is not present in the original footage."
       }
     ]
   },

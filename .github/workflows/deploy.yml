@@ -1,0 +1,60 @@
+name: Auto Update Sitemap & Re-Upload to Repository
+
+# Otomatis berjalan setiap ada push ke branch "main"
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Berikan izin WRITE agar GitHub Actions bisa auto-commit & push (re-upload) kembali ke repo
+permissions:
+  contents: write
+
+jobs:
+  auto-update-and-reupload:
+    name: Generate Sitemap, Build & Auto-Push to Repo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 2. Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 3. Install Dependencies
+        run: npm install
+
+      - name: 4. Generate Automated Sitemap (public/sitemap.xml)
+        run: node generate_sitemap.mjs
+
+      - name: 5. Auto Commit & Re-Upload Sitemap ke Branch main
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/sitemap.xml
+          if git diff --staged --quiet; then
+            echo "Sitemap sudah paling baru, tidak ada perubahan untuk di-upload."
+          else
+            git commit -m "chore(seo): auto-generate and re-upload sitemap.xml [skip ci]"
+            git push origin HEAD:main
+            echo "✅ Berhasil auto-upload public/sitemap.xml kembali ke repo branch main!"
+          fi
+
+      - name: 6. Build Static Website (out/)
+        run: npm run build
+
+      - name: 7. Auto-Upload Hasil Build Statis (out/) ke Branch gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          cname: convert.my.id
+          commit_message: 'chore(deploy): auto-upload static build out/ to gh-pages'
