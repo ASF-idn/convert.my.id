@@ -104,7 +104,18 @@ const themeInitScript = `
 })();
 `;
 
-const monetagInPagePushScript = `(function(s){s.dataset.zone='12194738',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
+const monetagInPagePushScript = `
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    if (!document.querySelector('script[data-zone="12194738"]')) {
+      (function(s){s.dataset.zone='12194738',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    }
+    if (!document.querySelector('script[data-zone="12126051"]')) {
+      (function(s){s.dataset.zone='12126051',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    }
+  }, 800);
+});
+`;
 
 export default function RootLayout({
   children,

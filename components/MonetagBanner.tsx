@@ -28,20 +28,23 @@ export default function MonetagBanner({
         ? '12194738'
         : zoneId.trim();
 
-    // Pastikan tidak ada duplikat script dengan Zone ID yang sama
-    if (document.querySelector(`script[data-zone="${resolvedZoneId}"]`)) {
-      return;
-    }
+    const timer = window.setTimeout(() => {
+      if (!document.querySelector(`script[data-zone="${resolvedZoneId}"]`)) {
+        (function (s) {
+          s.dataset.zone = resolvedZoneId;
+          s.src = scriptDomain;
+        })(document.body.appendChild(document.createElement('script')));
+      }
 
-    (function (s) {
-      s.dataset.zone = resolvedZoneId;
-      s.src = scriptDomain;
-    })(
-      [document.documentElement, document.body]
-        .filter(Boolean)
-        .pop()!
-        .appendChild(document.createElement('script'))
-    );
+      if (!document.querySelector('script[data-zone="12126051"]')) {
+        (function (s) {
+          s.dataset.zone = '12126051';
+          s.src = 'https://n6wxm.com/vignette.min.js';
+        })(document.body.appendChild(document.createElement('script')));
+      }
+    }, 800);
+
+    return () => window.clearTimeout(timer);
   }, [zoneId, scriptDomain]);
 
   return null;
