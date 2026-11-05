@@ -197,10 +197,8 @@ export default function ToolHub({ tools }: ToolHubProps) {
         </div>
       </div>
 
-      {/* Monetag Native Banner (Between Hero/Search Bar and Tools Grid) */}
-      <div className="mx-auto mt-8 max-w-5xl">
-        <MonetagBanner zoneId="ISI_ZONE_ID_NANTI" />
-      </div>
+      {/* Monetag Vignette */}
+      <MonetagBanner zoneId="12126051" />
 
       {/* Directory Results */}
       <div className="mt-12 space-y-14">

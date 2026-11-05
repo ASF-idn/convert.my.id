@@ -900,11 +900,9 @@ export default function ConverterWorkspace({ tool }: ConverterWorkspaceProps) {
       </div>
 
       {/* =====================================================================
-          MONETAG NATIVE BANNER PLACEMENT (Below Download / Copy Buttons)
+          MONETAG VIGNETTE
           ===================================================================== */}
-      <div className="pt-2">
-        <MonetagBanner zoneId="ISI_ZONE_ID_NANTI" />
-      </div>
+      <MonetagBanner zoneId="12126051" />
     </div>
   );
 }

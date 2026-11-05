@@ -23,25 +23,25 @@ export default function MonetagVignette({
   scriptDomain = 'https://n6wxm.com/vignette.min.js',
 }: MonetagVignetteProps) {
   useEffect(() => {
-    // Pastikan tidak ada duplikat script dengan ID yang sama
-    const scriptId = `monetag-vignette-${zoneId}`;
-    if (document.getElementById(scriptId)) return;
+    const resolvedZoneId =
+      !zoneId || zoneId.trim() === '' || zoneId.trim() === 'ISI_ZONE_ID_NANTI'
+        ? '12126051'
+        : zoneId.trim();
 
-    const script = document.createElement('script');
-    script.id = scriptId;
-    script.type = 'text/javascript';
-    script.async = true;
-    script.dataset.zone = zoneId.trim();
-    script.src = scriptDomain;
+    // Pastikan tidak ada duplikat script dengan Zone ID yang sama
+    if (document.querySelector(`script[data-zone="${resolvedZoneId}"]`)) {
+      return;
+    }
 
-    document.body.appendChild(script);
-
-    return () => {
-      const existingScript = document.getElementById(scriptId);
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
+    (function (s) {
+      s.dataset.zone = resolvedZoneId;
+      s.src = scriptDomain;
+    })(
+      [document.documentElement, document.body]
+        .filter(Boolean)
+        .pop()!
+        .appendChild(document.createElement('script'))
+    );
   }, [zoneId, scriptDomain]);
 
   return null; // Vignette banner bersifat overlay otomatis, tidak memerlukan kontainer HTML khusus
