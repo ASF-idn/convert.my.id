@@ -1,19 +1,20 @@
-name: Auto Update Sitemap & Re-Upload to Repository
+name: Auto Update Sitemap & Sync Repository
 
-# Otomatis berjalan setiap ada push ke branch "main"
+# Otomatis berjalan setiap ada push ke branch "main" (kecuali push dari bot sendiri)
 on:
   push:
     branches:
       - main
   workflow_dispatch:
 
-# Berikan izin WRITE agar GitHub Actions bisa auto-commit & push (re-upload) kembali ke repo
 permissions:
   contents: write
 
 jobs:
-  auto-update-and-reupload:
-    name: Generate Sitemap, Build & Auto-Push to Repo
+  sync-sitemap:
+    name: Verify & Auto-Update Sitemap in main
+    # Mencegah infinite loop tanpa memakai [skip ci] (agar Cloudflare Pages tidak men-skip deploy)
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
@@ -29,32 +30,18 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: 3. Install Dependencies
-        run: npm install
-
-      - name: 4. Generate Automated Sitemap (public/sitemap.xml)
+      - name: 3. Generate Automated Sitemap (public/sitemap.xml)
         run: node generate_sitemap.mjs
 
-      - name: 5. Auto Commit & Re-Upload Sitemap ke Branch main
+      - name: 4. Commit & Push Sitemap jika ada penambahan URL baru
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add public/sitemap.xml
           if git diff --staged --quiet; then
-            echo "Sitemap sudah paling baru, tidak ada perubahan untuk di-upload."
+            echo "✅ public/sitemap.xml sudah sinkron, langsung lanjut ke Cloudflare Pages."
           else
-            git commit -m "chore(seo): auto-generate and re-upload sitemap.xml [skip ci]"
+            git commit -m "chore(seo): auto-update public/sitemap.xml"
             git push origin HEAD:main
-            echo "✅ Berhasil auto-upload public/sitemap.xml kembali ke repo branch main!"
+            echo "✅ Berhasil memperbarui public/sitemap.xml di branch main!"
           fi
-
-      - name: 6. Build Static Website (out/)
-        run: npm run build
-
-      - name: 7. Auto-Upload Hasil Build Statis (out/) ke Branch gh-pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          cname: convert.my.id
-          commit_message: 'chore(deploy): auto-upload static build out/ to gh-pages'

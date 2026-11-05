@@ -43,6 +43,7 @@ try {
   }
 
   console.log('☁️ [4/4] Meng-upload (push) otomatis ke GitHub branch main...');
+  run('git pull --rebase origin main');
   run('git push -u origin main');
 
   console.log(

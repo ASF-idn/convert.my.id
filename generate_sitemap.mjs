@@ -52,7 +52,9 @@ function escapeXml(unsafe) {
 }
 
 function generateSitemapXml() {
-  const lastModDate = new Date().toISOString();
+  // Gunakan format tanggal YYYY-MM-DD sesuai standar Google Sitemap
+  // agar tidak memicu commit duplikat setiap detik di CI/CD
+  const lastModDate = new Date().toISOString().split('T')[0];
 
   // Baca daftar tools dinamis dari data/converters.json
   let dynamicTools = [];
