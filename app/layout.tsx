@@ -52,7 +52,7 @@ const themeInitScript = `
 })();
 `;
 
-const monetagVignetteScript = `(function(s){s.dataset.zone='12126051',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
+const monetagInPagePushScript = `(function(s){s.dataset.zone='12194738',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
 
 export default function RootLayout({
   children,
@@ -68,7 +68,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
-        <script dangerouslySetInnerHTML={{ __html: monetagVignetteScript }} />
+        <script dangerouslySetInnerHTML={{ __html: monetagInPagePushScript }} />
       </body>
     </html>
   );

@@ -197,8 +197,8 @@ export default function ToolHub({ tools }: ToolHubProps) {
         </div>
       </div>
 
-      {/* Monetag Vignette */}
-      <MonetagBanner zoneId="12126051" />
+      {/* Monetag In-Page Push Banner */}
+      <MonetagBanner zoneId="12194738" />
 
       {/* Directory Results */}
       <div className="mt-12 space-y-14">

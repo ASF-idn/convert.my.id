@@ -900,9 +900,9 @@ export default function ConverterWorkspace({ tool }: ConverterWorkspaceProps) {
       </div>
 
       {/* =====================================================================
-          MONETAG VIGNETTE
+          MONETAG IN-PAGE PUSH BANNER
           ===================================================================== */}
-      <MonetagBanner zoneId="12126051" />
+      <MonetagBanner zoneId="12194738" />
     </div>
   );
 }

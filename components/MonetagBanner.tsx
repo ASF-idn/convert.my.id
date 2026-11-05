@@ -2,30 +2,30 @@
 
 import { useEffect } from 'react';
 
-interface MonetagVignetteProps {
+interface MonetagInPagePushProps {
   /**
-   * Monetag Vignette Zone ID.
+   * Monetag In-Page Push Zone ID.
    */
   zoneId?: string;
   /**
-   * Monetag Vignette script domain/URL.
+   * Monetag In-Page Push script domain/URL.
    */
   scriptDomain?: string;
 }
 
 /**
- * Clean Vignette Banner Component for Monetag on convert.my.id.
- * Uses useEffect to inject the vignette script safely on the client side only,
+ * Clean In-Page Push Banner Component for Monetag on convert.my.id.
+ * Uses useEffect to inject the in-page push script safely on the client side only,
  * preventing hydration errors and duplicate executions.
  */
-export default function MonetagVignette({
-  zoneId = '12126051',
-  scriptDomain = 'https://n6wxm.com/vignette.min.js',
-}: MonetagVignetteProps) {
+export default function MonetagBanner({
+  zoneId = '12194738',
+  scriptDomain = 'https://nap5k.com/tag.min.js',
+}: MonetagInPagePushProps) {
   useEffect(() => {
     const resolvedZoneId =
       !zoneId || zoneId.trim() === '' || zoneId.trim() === 'ISI_ZONE_ID_NANTI'
-        ? '12126051'
+        ? '12194738'
         : zoneId.trim();
 
     // Pastikan tidak ada duplikat script dengan Zone ID yang sama
@@ -44,5 +44,5 @@ export default function MonetagVignette({
     );
   }, [zoneId, scriptDomain]);
 
-  return null; // Vignette banner bersifat overlay otomatis, tidak memerlukan kontainer HTML khusus
+  return null;
 }
