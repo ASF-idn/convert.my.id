@@ -63,12 +63,12 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: monetagInPagePushScript }} />
       </head>
       <body className="flex min-h-screen flex-col font-sans selection:bg-brand-500 selection:text-white">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
-        <script dangerouslySetInnerHTML={{ __html: monetagInPagePushScript }} />
       </body>
     </html>
   );
