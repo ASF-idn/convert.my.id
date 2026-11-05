@@ -1,5 +1,5 @@
 import { CONVERTER_TOOLS } from '@/lib/converters';
-import { Cpu, Lock, Zap } from 'lucide-react';
+import { Lock, Zap } from 'lucide-react';
 import Link from 'next/link';
 
 /**
@@ -16,9 +16,13 @@ export default function Footer() {
           {/* Column 1: Brand & Privacy Philosophy */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white">
-                <Cpu className="h-4 w-4" />
-              </div>
+              <img
+                src="/logo.jpg"
+                alt="convert.my.id logo"
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-full object-cover shadow-sm"
+              />
               <span className="font-mono text-lg font-bold tracking-tight text-slate-900 dark:text-white">
                 convert.my.id
               </span>

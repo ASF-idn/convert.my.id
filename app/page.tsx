@@ -14,6 +14,13 @@ export default function HomePage() {
         '@id': 'https://convert.my.id/#organization',
         name: 'convert.my.id',
         url: 'https://convert.my.id',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://convert.my.id/logo.jpg',
+          width: 1024,
+          height: 1024,
+        },
+        image: 'https://convert.my.id/logo.jpg',
         description:
           'Platform alat konverter file online gratis berbasis 100% client-side browser.',
       },

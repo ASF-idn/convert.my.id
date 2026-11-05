@@ -36,6 +36,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  icons: {
+    icon: [
+      { url: '/logo.jpg', type: 'image/jpeg' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'id_ID',
@@ -46,6 +54,14 @@ export const metadata: Metadata = {
       'convert.my.id – Alat Konverter File Online Gratis, Instan & 100% Privasi',
     description:
       '200+ alat konverter file online gratis 100% client-side. Konversi Gambar, Audio/Video, Model 3D, CSS, dan Data langsung di browser tanpa upload server.',
+    images: [
+      {
+        url: '/logo.jpg',
+        width: 1024,
+        height: 1024,
+        alt: 'convert.my.id – Alat Konverter File Online Gratis',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -53,6 +69,7 @@ export const metadata: Metadata = {
       'convert.my.id – Alat Konverter File Online Gratis & 100% Client-Side',
     description:
       '200+ alat konverter file online gratis di browser kamu tanpa upload server. Cepat, aman, dan tanpa batas.',
+    images: ['/logo.jpg'],
   },
   robots: {
     index: true,

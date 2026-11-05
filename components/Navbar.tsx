@@ -1,4 +1,4 @@
-import { Cpu, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
 
@@ -15,9 +15,13 @@ export default function Navbar() {
             href="/"
             className="group flex items-center gap-2.5 text-slate-900 transition-opacity hover:opacity-90 dark:text-white"
           >
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white shadow-sm shadow-brand-500/30 transition-transform group-hover:scale-105">
-              <Cpu className="h-5 w-5" />
-            </div>
+            <img
+              src="/logo.jpg"
+              alt="convert.my.id logo"
+              width={36}
+              height={36}
+              className="h-9 w-9 rounded-full object-cover shadow-sm transition-transform group-hover:scale-105"
+            />
             <div className="flex flex-col">
               <span className="font-mono text-base font-bold tracking-tight leading-none">
                 convert.my.id
