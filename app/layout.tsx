@@ -8,32 +8,67 @@ const SITE_URL = 'https://convert.my.id';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'convert.my.id – Free, Instant & Private Online Converters',
+    default:
+      'convert.my.id – Alat Konverter File Online Gratis, Cepat & 100% Privasi (Free Online Converter)',
     template: '%s',
   },
   description:
-    '100% Client-side online converters on convert.my.id. Convert Code & Dev, Image & Media, CSS & Unit, and Text & Data formats locally in your browser with zero server uploads.',
+    'Alat konverter file online gratis 100% client-side di convert.my.id. Konversi gambar (WebP, PNG, JPG, SVG), video & audio (MP4, MP3, WAV), 3D model (OBJ, STL, GLB), kode & data (JSON, CSV, YAML) instan di browser tanpa upload ke server.',
+  keywords: [
+    'alat konverter file online gratis',
+    'konverter file online',
+    'free online file converter',
+    'convert file online gratis',
+    'ubah format file online',
+    'konverter gambar online',
+    'konverter video ke mp3',
+    'json to typescript converter',
+    'image to webp converter',
+    'mp4 to mp3 converter',
+    '3d model converter online',
+    'client-side converter',
+    'convert.my.id',
+  ],
+  authors: [{ name: 'convert.my.id', url: SITE_URL }],
+  creator: 'convert.my.id',
+  publisher: 'convert.my.id',
+  category: 'Utilities & Developer Tools',
   alternates: {
     canonical: SITE_URL,
   },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'id_ID',
+    alternateLocale: ['en_US'],
     url: SITE_URL,
     siteName: 'convert.my.id',
-    title: 'convert.my.id – Free, Instant & Private Online Converters',
+    title:
+      'convert.my.id – Alat Konverter File Online Gratis, Instan & 100% Privasi',
     description:
-      '100% Client-side. Your files and data never leave your browser. 100 instant developer, image, CSS, and data conversion tools.',
+      '200+ alat konverter file online gratis 100% client-side. Konversi Gambar, Audio/Video, Model 3D, CSS, dan Data langsung di browser tanpa upload server.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'convert.my.id – Free, Instant & Private Online Converters',
+    title:
+      'convert.my.id – Alat Konverter File Online Gratis & 100% Client-Side',
     description:
-      '100% Client-side. Your files and data never leave your browser.',
+      '200+ alat konverter file online gratis di browser kamu tanpa upload server. Cepat, aman, dan tanpa batas.',
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    other: {
+      'msvalidate.01': '21DE076E729FB5B2911615629505BF67',
+    },
   },
 };
 

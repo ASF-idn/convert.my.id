@@ -8,11 +8,116 @@ import { Cpu, Lock, ShieldCheck, Zap } from 'lucide-react';
 export default function HomePage() {
   const jsonLdWebsite = {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'convert.my.id',
-    url: 'https://convert.my.id',
-    description:
-      '100% Client-side. Your files and data never leave your browser. 100 free, instant online converters on convert.my.id.',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': 'https://convert.my.id/#organization',
+        name: 'convert.my.id',
+        url: 'https://convert.my.id',
+        description:
+          'Platform alat konverter file online gratis berbasis 100% client-side browser.',
+      },
+      {
+        '@type': 'WebSite',
+        '@id': 'https://convert.my.id/#website',
+        url: 'https://convert.my.id',
+        name: 'convert.my.id – Alat Konverter File Online Gratis',
+        alternateName: ['convert.my.id', 'Convert My ID'],
+        description:
+          'Alat konverter file online gratis 100% client-side. Konversi gambar, audio, video, model 3D, kode, dan dokumen langsung di browser tanpa upload ke server.',
+        publisher: {
+          '@id': 'https://convert.my.id/#organization',
+        },
+        inLanguage: ['id-ID', 'en-US'],
+      },
+      {
+        '@type': 'CollectionPage',
+        '@id': 'https://convert.my.id/#webpage',
+        url: 'https://convert.my.id',
+        name: 'convert.my.id – 200+ Alat Konverter File Online Gratis & Client-Side',
+        isPartOf: {
+          '@id': 'https://convert.my.id/#website',
+        },
+        about: {
+          '@id': 'https://convert.my.id/#organization',
+        },
+        description:
+          'Direktori lengkap 200+ alat konverter file online gratis untuk Gambar & Media, Audio & Video, Model 3D & AR, Kode & Developer, CSS & Unit, serta Teks & Data.',
+      },
+      {
+        '@type': 'ItemList',
+        '@id': 'https://convert.my.id/#sitelinks-menu',
+        name: 'Menu Alat Konverter File Online Populer',
+        description:
+          'Daftar alat konverter file online gratis paling populer di convert.my.id',
+        itemListElement: [
+          {
+            '@type': 'SiteNavigationElement',
+            position: 1,
+            name: 'Image to WebP Converter',
+            description:
+              'Konversi gambar PNG, JPG, dan GIF ke format WebP secara instan di browser.',
+            url: 'https://convert.my.id/convert/image-to-webp',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 2,
+            name: 'PNG to JPG Converter',
+            description:
+              'Ubah gambar PNG transparan menjadi file JPG berkualitas tinggi secara gratis.',
+            url: 'https://convert.my.id/convert/png-to-jpg',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 3,
+            name: 'MP4 to MP3 Audio Extractor',
+            description:
+              'Ekstrak audio MP3 jernih dari file video MP4 langsung di perangkat kamu.',
+            url: 'https://convert.my.id/convert/mp4-to-mp3',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 4,
+            name: 'JSON to TypeScript Interface',
+            description:
+              'Konversi payload JSON menjadi kode TypeScript interface secara otomatis.',
+            url: 'https://convert.my.id/convert/json-to-typescript',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 5,
+            name: 'CSV to JSON Converter',
+            description:
+              'Ubah data tabel CSV dari Excel menjadi array objek JSON terstruktur.',
+            url: 'https://convert.my.id/convert/csv-to-json',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 6,
+            name: 'PX to REM CSS Converter',
+            description:
+              'Konversi satuan piksel (px) ke satuan responsif rem untuk desain CSS modern.',
+            url: 'https://convert.my.id/convert/px-to-rem',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 7,
+            name: 'OBJ to STL 3D Converter',
+            description:
+              'Konversi model 3D Wavefront OBJ menjadi format cetak 3D STL di browser.',
+            url: 'https://convert.my.id/convert/obj-to-stl',
+          },
+          {
+            '@type': 'SiteNavigationElement',
+            position: 8,
+            name: 'Markdown to HTML Converter',
+            description:
+              'Ubah dokumen Markdown (.md) menjadi kode HTML5 bersih dan siap pakai.',
+            url: 'https://convert.my.id/convert/markdown-to-html',
+          },
+        ],
+      },
+    ],
   };
 
   return (
