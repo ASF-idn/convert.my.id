@@ -37,7 +37,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/sitemap.xml public/robots.txt public/_headers
+          git add public/sitemap.xml public/sitemap-main.xml public/robots.txt public/_headers
           if git diff --staged --quiet; then
             echo "✅ public/sitemap.xml sudah sinkron, langsung lanjut ke Cloudflare Pages."
           else

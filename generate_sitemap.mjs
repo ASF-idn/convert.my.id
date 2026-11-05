@@ -77,6 +77,16 @@ Sitemap: ${SITE_URL}/sitemap.xml
   Cache-Control: public, max-age=0, must-revalidate
   X-Content-Type-Options: nosniff
 
+/sitemap-main.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+
+/*.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Content-Type-Options: nosniff
+
 /robots.txt
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=0, must-revalidate
@@ -87,15 +97,17 @@ Sitemap: ${SITE_URL}/sitemap.xml
   }
 
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), xmlContent, 'utf-8');
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-main.xml'), xmlContent, 'utf-8');
   fs.writeFileSync(path.join(PUBLIC_DIR, 'robots.txt'), robotsContent, 'utf-8');
   fs.writeFileSync(path.join(PUBLIC_DIR, '_headers'), headersContent, 'utf-8');
 
   console.log(
-    `✅ Berhasil membuat public/sitemap.xml (${allUrls.length} URL), public/robots.txt, dan public/_headers`
+    `✅ Berhasil membuat public/sitemap.xml & public/sitemap-main.xml (${allUrls.length} URL), public/robots.txt, dan public/_headers`
   );
 
   if (fs.existsSync(OUT_DIR)) {
     fs.writeFileSync(path.join(OUT_DIR, 'sitemap.xml'), xmlContent, 'utf-8');
+    fs.writeFileSync(path.join(OUT_DIR, 'sitemap-main.xml'), xmlContent, 'utf-8');
     fs.writeFileSync(path.join(OUT_DIR, 'robots.txt'), robotsContent, 'utf-8');
     fs.writeFileSync(path.join(OUT_DIR, '_headers'), headersContent, 'utf-8');
     console.log(`✅ Berhasil menyalin file SEO ke folder out/`);
