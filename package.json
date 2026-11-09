@@ -6,6 +6,7 @@
   "scripts": {
     "generate": "node generate_tools.mjs",
     "sitemap": "node generate_sitemap.mjs",
+    "prebuild": "node generate_sitemap.mjs",
     "deploy": "node deploy_github.mjs",
     "dev": "next dev",
     "build": "node generate_sitemap.mjs && next build",
